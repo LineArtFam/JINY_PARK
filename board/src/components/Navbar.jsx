@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Navbar() {
+export default function Navbar({ login }) {
   return (
     <NavContainer>
       <div className="navLeft">
@@ -9,12 +10,22 @@ export default function Navbar() {
       </div>
       <div className="navCenter">JIN.</div>
       <div className="navRight">
-        <ul className="menuList">
-          <li className="menuListItem">Home</li>
-          <li className="menuListItem">board</li>
-          <li className="menuListItem">Home</li>
-          <li className="menuListItem">Home</li>
-        </ul>
+        <Link to="/" className="menuListItem">
+          Home
+        </Link>
+        <Link to="/board" className="menuListItem">
+          board
+        </Link>
+
+        {login ? (
+          <Link to="/" className="menuListItem">
+            logout
+          </Link>
+        ) : (
+          <Link to="/login" className="menuListItem">
+            login
+          </Link>
+        )}
       </div>
     </NavContainer>
   );
@@ -29,20 +40,16 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .navCenter {
+    text-align: center;
+  }
   .navRight {
-    height: 100vh;
-    .menuList {
-      background: #ccc;
-      display: flex;
-      height: 100%;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .menuListItem {
-        text-decoration: none;
-        list-style: none;
-      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a {
+      text-decoration: none;
+      padding: 20px;
     }
   }
 `;
